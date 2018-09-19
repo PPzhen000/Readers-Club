@@ -1,0 +1,13 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<h3>Here is your reading list:</h3>
+
+<br>
+
+<% @user.books.each do |book| %>
+  <ol>
+    <%= book.title %> - <%= book.author_name %>
+  </ol>
+<% end %>
+<br>
+<a href="/books/new">Add a Book To Your Reading List!</a>
