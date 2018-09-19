@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   end
 
   get '/books/new' do
-    
+    erb :'/books/create_book'
   end
 
   post '/books' do
