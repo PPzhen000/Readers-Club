@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 require 'pry'
 
   get '/signup' do
-
+    if !logged_in?
+      erb :'users/signup'
+    else
+      redirect to '/books'
+    end
   end
 
   post '/signup' do
