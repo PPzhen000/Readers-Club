@@ -1,0 +1,12 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<h3>Here's your reading list: </h3>
+
+<% @books.each do |book| %>
+  <p><%= book.title %> - <%= book.author_name %></p>
+<% end %>
+
+To add a book to your reading list:
+<a href="/books/new">Add a Book</a>
+
+<a href="/logout">Log Out</a>
