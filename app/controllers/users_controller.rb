@@ -35,7 +35,7 @@ require 'pry'
       session[:user_id] = @user.id
       redirect to '/books'
     else
-      redirect to '/login'
+      redirect to '/signin'
     end
   end
 
@@ -47,7 +47,7 @@ require 'pry'
   get '/logout' do
     if logged_in?
       session.destroy
-      redirect to '/login'
+      redirect to '/signin'
     else
       redirect to '/'
     end

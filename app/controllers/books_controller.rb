@@ -6,7 +6,7 @@ class BooksController < ApplicationController
       @books = Book.all
       erb :'/books/books'
     else
-      redirect to '/login'
+      redirect to '/signin'
     end
   end
 
@@ -24,7 +24,7 @@ class BooksController < ApplicationController
         redirect to '/books'
       end
     else
-      redirect to '/login'
+      redirect to '/signin'
     end
   end
 
@@ -37,7 +37,7 @@ class BooksController < ApplicationController
         redirect to '/books'
       end
     else
-      redirect to '/login'
+      redirect to '/signin'
     end
   end
 
@@ -58,7 +58,7 @@ class BooksController < ApplicationController
         end
       end
     else
-      redirect to '/login'
+      redirect to '/signin'
     end
   end
 
@@ -70,7 +70,7 @@ class BooksController < ApplicationController
       end
       redirect to '/books'
     else
-      redirect to '/login'
+      redirect to '/signin'
     end
   end
 
