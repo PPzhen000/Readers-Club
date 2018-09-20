@@ -15,11 +15,30 @@ class BooksController < ApplicationController
   end
 
   post '/books' do
-
+    if logged_in?
+      if params[:title] == "" || params[:author_name] == ""
+        redirect to '/books/new'
+      else
+        @book = current_user.books.build(title: params[:title], author_name: params[:author_name])
+        @book.save
+        redirect to '/books'
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   get '/books/:slug/edit' do
-
+    if logged_in?
+      @book = Book.find_by_id(params[:id])
+      if @book && @book.user == current_user
+        erb :'books/edit_book'
+      else
+        redirect to '/books'
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   patch '/books/:slug' do
