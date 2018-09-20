@@ -26,3 +26,44 @@ book_list.each do |title, book_hash|
   end
   p.save
 end
+
+category_list = {
+    "Arts & Music" => {
+    },
+    "Biographies" => {
+    },
+    "Business" => {
+    },
+    "Comics" => {
+    },
+    "Computers & Tech" => {
+    },
+    "Cooking" => {
+    },
+    "History" => {
+    },
+    "Horror" => {
+    },
+    "Literature" => {
+    },
+    "Medical" => {
+    },
+    "Social Sciences" => {
+    },
+    "Religion" => {
+    },
+    "Science & Math" => {
+    },
+    "Fantasy" => {
+    },
+    "Self-Help" => {
+    },
+    "Other" => {
+    }
+  }
+
+category_list.each do |name, category_hash|
+  p = Category.new
+  p.name = name
+  p.save
+end
