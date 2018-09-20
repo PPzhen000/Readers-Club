@@ -42,7 +42,24 @@ class BooksController < ApplicationController
   end
 
   patch '/books/:slug' do
-
+    if logged_in?
+      if params[:content] == ""
+        redirect to "/books/#{params[:slug]}/edit"
+      else
+        @book = Book.find_by_id(params[:slug])
+        if @book && @book.user == current_user
+          if @book.update(content: params[:content])
+            redirect to "/books/#{@book.slug}"
+          else
+            redirect to "/books/#{@book.slug}/edit"
+          end
+        else
+          redirect to '/books'
+        end
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   delete '/books/:slug/delete' do
