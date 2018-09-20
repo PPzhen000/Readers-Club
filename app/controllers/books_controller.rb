@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
 
   get '/books' do
+    # binding.pry
     if logged_in?
       @user = current_user
-      @books = Book.all
+      @books = @user.books
       erb :'/books/books'
     else
       redirect to '/signin'

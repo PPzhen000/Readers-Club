@@ -40,14 +40,23 @@ require 'pry'
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+     # binding.pry
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      if @user == current_user
+        erb :'users/show'
+      else
+        redirect to '/'
+      end
+    else
+      redirect to '/signin'
+    end
   end
 
   get '/logout' do
     if logged_in?
       session.destroy
-      redirect to '/signin'
+      redirect to '/login'
     else
       redirect to '/'
     end
