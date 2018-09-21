@@ -10,7 +10,7 @@
   <br>
   <label>Genre:</label>
   <%Category.all.each do |category|%>
-    <input type="checkbox" name="genre_id" id="<%=category.id%>" value="<%=category.id%>" <%='checked' if @book.category == category %>><%=category.name%></input>
+    <input type="checkbox" name="category_id" id="<%=category.id%>" value="<%=category.id%>" <%='checked' if @book.category == category %>><%=category.name%></input>
   <%end%>
   <input type="submit" value="Edit Book">
 </form>

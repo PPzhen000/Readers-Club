@@ -56,7 +56,7 @@ require 'pry'
   get '/logout' do
     if logged_in?
       session.destroy
-      redirect to '/login'
+      redirect to '/signin'
     else
       redirect to '/'
     end
