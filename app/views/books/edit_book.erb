@@ -2,7 +2,15 @@
 
 <form method="post" action="/books/<%=@book.slug%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <label>Book Title:</label>
   <input type="text" name="title" value="<%= @book.title %>">
+  <br>
+  <label>Author:</label>
   <input type="text" name="author_name" value="<%= @book.author_name %>">
-  <input type="submit" value="submit">
+  <br>
+  <label>Genre:</label>
+  <%Category.all.each do |category|%>
+    <input type="checkbox" name="genre_id" id="<%=category.id%>" value="<%=category.id%>" <%='checked' if @book.category == category %>><%=category.name%></input>
+  <%end%>
+  <input type="submit" value="Edit Book">
 </form>

@@ -30,9 +30,10 @@ class BooksController < ApplicationController
   end
 
   get '/books/:slug/edit' do
+    # binding.pry
     if logged_in?
-      @book = Book.find_by_id(params[:id])
-      if @book && @book.user == current_user
+      @book = Book.find_by_slug(params[:slug])
+      if @book && @book.users.first == current_user  #assuming each book only belongs to one user for now
         erb :'books/edit_book'
       else
         redirect to '/books'
@@ -43,19 +44,19 @@ class BooksController < ApplicationController
   end
 
   patch '/books/:slug' do
+    binding.pry
     if logged_in?
-      if params[:content] == ""
+      if params[:title] == "" || params[:author_name] == ""
         redirect to "/books/#{params[:slug]}/edit"
       else
-        @book = Book.find_by_id(params[:slug])
+        @book = Book.find_by_slug(params[:slug])
         if @book && @book.user == current_user
-          if @book.update(content: params[:content])
-            redirect to "/books/#{@book.slug}"
-          else
-            redirect to "/books/#{@book.slug}/edit"
-          end
+          @book.update(title: params[:title], author_name: params[:author_name])
+          redirect to "/books/#{@book.slug}"
         else
-          redirect to '/books'
+            redirect to "/books/#{@book.slug}/edit"
+        # else
+        #   redirect to '/books'
         end
       end
     else

@@ -2,9 +2,9 @@
 
 <h3>Here's your reading list: </h3>
 
-<% @books.each_with do |book| %>
-  <!-- <a href="/books/<%= book.slug %>/edit"></a> -->
-  <p><%= book.title %> - <%= book.author_name %></p>
+<% @books.each_with_index do |book, index| %>
+    <p><a href="/books/<%=book.slug%>/edit"><%=index + 1%>. </a>
+    <%= book.title %> - <%= book.author_name %></p>
 <% end %>
 
 To add a book to your reading list:
