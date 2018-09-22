@@ -11,7 +11,7 @@ Add a book to your reading list:
   <br>
   <label>Choose Genres for the book:</label>
   <%Category.all.each do |category|%>
-    <input type="checkbox" name="book[category]" id="<%=category.id%>" value="<%=category.id%>"><%=category.name%></input>
+    <input type="checkbox" name="category_id" id="<%=category.id%>" value="<%=category.id%>"><%=category.name%></input>
   <%end%>
   <input type="submit" value="Add Book">
 </form>

@@ -1,10 +1,8 @@
 class BooksController < ApplicationController
 
   get '/books' do
-    # binding.pry
+     binding.pry
     if logged_in?
-      @user = current_user
-      @books = @user.books
       erb :'/books/books'
     else
       redirect to '/signin'
@@ -16,13 +14,17 @@ class BooksController < ApplicationController
   end
 
   post '/books' do
+    # binding.pry
     if logged_in?
       if params[:title] == "" || params[:author_name] == ""
         redirect to '/books/new'
       else
-        @book = current_user.books.build(title: params[:title], author_name: params[:author_name])
-        @book.save
-        redirect to '/books'
+        @book = current_user.books.build(title: params[:title], author_name: params[:author_name], category_id: params[:category_id])
+        if @book.save
+          redirect to '/books'
+        else
+          redirect to '/books/new'
+        end
       end
     else
       redirect to '/signin'
@@ -64,7 +66,7 @@ class BooksController < ApplicationController
         redirect to "/books/#{params[:slug]}/edit"
       else
         @book = Book.find_by_slug(params[:slug])
-        if @book && @book.users[0] == current_user
+        if @book && @book.users.first == current_user
           @book.update(title: params[:title], author_name: params[:author_name], category_id: params[:category_id])
           redirect to "/books"
         else
@@ -80,7 +82,7 @@ class BooksController < ApplicationController
     binding.pry
     if logged_in?
       @book = Book.find_by_slug(params[:slug])
-      if @book && @book.user[0] == current_user
+      if @book && @book.users.first == current_user
         @book.delete
       end
       redirect to '/books'

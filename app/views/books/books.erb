@@ -1,8 +1,8 @@
-<h1>Welcome, <%= @user.username %></h1>
+<h1>Welcome, <%= current_user.username %></h1>
 
 <h3>Here's your reading list: </h3>
 
-<% @books.each_with_index do |book, index| %>
+<% current_user.books.each_with_index do |book, index| %>
     <p><a href="/books/<%=book.slug%>"><%=index + 1%>. <%= book.title %> - <%= book.author_name %></a></p>
 <% end %>
 
