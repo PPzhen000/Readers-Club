@@ -1,8 +1,13 @@
-<p><%= @book.title %> - <%= @book.author_name %>
+<h1>Hello, <%= current_user.username %></h1>
 
-<form method="post" action="/books/<%=@book.slug%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Book">
-</form>
-
-<a href="/books/<%=@book.slug%>/edit">Edit Book</a>
+<h1><%= @book.title %> - <%= @book.author_name %></h1><br>
+<h2>Description: <%= @book.description %></h2><br>
+<!-- <p>Genre: </p> -->
+<% if logged_in? && current_user == @book.users[0] %>
+  <form method="post" action="/books/<%=@book.slug%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Book">
+  </form>
+  <br>
+  <a href="/books/<%=@book.slug%>/edit">Edit Book</a>
+<% end %>

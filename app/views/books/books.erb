@@ -3,7 +3,7 @@
 <h3>Here's your reading list: </h3>
 
 <% current_user.books.each_with_index do |book, index| %>
-    <p><a href="/books/<%=book.slug%>/edit"><%=index + 1%>. <%= book.title %> - <%= book.author_name %></a></p>
+    <p><a href="/books/<%=book.slug%>"><%=index + 1%>. <%= book.title %> - <%= book.author_name %></a></p>
 <% end %>
 
 To add a book to your reading list:

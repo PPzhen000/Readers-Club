@@ -9,6 +9,10 @@ Add a book to your reading list:
   <br>
   <input type="text" name="author_name">
   <br>
+  <label>Description:</label>
+  <br>
+  <input type="text" name="description">
+  <br>
   <label>Choose Genres for the book:</label>
   <%Category.all.each do |category|%>
     <input type="checkbox" name="category_id" id="<%=category.id%>" value="<%=category.id%>"><%=category.name%></input>

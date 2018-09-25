@@ -8,6 +8,9 @@
   <label>Author:</label>
   <input type="text" name="author_name" value="<%= @book.author_name %>">
   <br>
+  <label>Description:</label>
+  <input type="text" name="description" value="<%= @book.description %>">
+  <br>
   <label>Genre:</label>
   <%Category.all.each do |category|%>
     <input type="checkbox" name="category_id" id="<%=category.id%>" value="<%=category.id%>" <%='checked' if @book.category == category %>><%=category.name%></input>
