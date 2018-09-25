@@ -14,7 +14,7 @@ require 'pry'
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      if !current_user.username.find_by(username: params[:username])
+      if !User.find_by(username: params[:username])
         @user = User.create(params)
         session[:user_id] = @user.id
         redirect to '/books'
