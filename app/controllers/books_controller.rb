@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   get '/books' do
-     binding.pry
+     # binding.pry
     if logged_in?
       erb :'/books/books'
     else
@@ -19,7 +19,7 @@ class BooksController < ApplicationController
       if params[:title] == "" || params[:author_name] == ""
         redirect to '/books/new'
       else
-        @book = current_user.books.build(title: params[:title], author_name: params[:author_name], category_id: params[:category_id])
+        @book = current_user.books.create(title: params[:title], author_name: params[:author_name], category_id: params[:category_id])
         if @book.save
           redirect to '/books'
         else
@@ -33,9 +33,8 @@ class BooksController < ApplicationController
 
   get '/books/:slug' do
     # binding.pry
-    if logged_in?
       @book = Book.find_by_slug(params[:slug])
-      if @book && @book.users.first == current_user  #assuming each book only belongs to one user for now
+      if @book
         erb :'books/show_book'
       else
         redirect to '/books'
@@ -46,10 +45,10 @@ class BooksController < ApplicationController
   end
 
   get '/books/:slug/edit' do
-    # binding.pry
+     # binding.pry
     if logged_in?
       @book = Book.find_by_slug(params[:slug])
-      if @book && @book.users.first == current_user  #assuming each book only belongs to one user for now
+      if @book
         erb :'books/edit_book'
       else
         redirect to '/books'
@@ -60,13 +59,13 @@ class BooksController < ApplicationController
   end
 
   patch '/books/:slug' do
-    # binding.pry
+     # binding.pry
     if logged_in?
       if params[:title] == "" || params[:author_name] == ""
         redirect to "/books/#{params[:slug]}/edit"
       else
         @book = Book.find_by_slug(params[:slug])
-        if @book && @book.users.first == current_user
+        if @book
           @book.update(title: params[:title], author_name: params[:author_name], category_id: params[:category_id])
           redirect to "/books"
         else
@@ -79,17 +78,16 @@ class BooksController < ApplicationController
   end
 
   delete '/books/:slug/delete' do
-    binding.pry
+     # binding.pry
     if logged_in?
       @book = Book.find_by_slug(params[:slug])
-      if @book && @book.users.first == current_user
-        @book.delete
+      if @book
+        @book.destroy
       end
       redirect to '/books'
     else
       redirect to '/signin'
     end
   end
-
 
 end

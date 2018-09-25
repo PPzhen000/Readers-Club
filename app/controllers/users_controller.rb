@@ -44,9 +44,10 @@ require 'pry'
     if logged_in?
       @user = User.find_by_slug(params[:slug])
       if @user == current_user
-        erb :'users/show'
+        # erb :'users/show'
+        redirect to '/books'
       else
-        redirect to '/'
+        redirect to '/signin'
       end
     else
       redirect to '/signin'
